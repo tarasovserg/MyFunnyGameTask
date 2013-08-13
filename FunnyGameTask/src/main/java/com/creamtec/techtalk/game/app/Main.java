@@ -28,7 +28,6 @@ public class Main {
     		if(cell.getPosition().y == 0) {
     			System.out.println();
     		}
-    		//Hello World!
     		/*System.out.println(cell.getPosition().x + "" + cell.getPosition().y);
     		if(true) continue;*/
     		if(cell.getBorder().hasBottom() == false && 
