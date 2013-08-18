@@ -2,6 +2,9 @@ package com.creamtec.techtalk.game.app;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -15,11 +18,7 @@ import com.creamtec.techtalk.game.api.Icon;
 
 public class FeedProcessorImp  implements FeedProcessor{
 
-	private int [] generatNumNoRep(int maxVal, int size) {
-		int [] arr = new int[size];
-		return arr;
-		
-	}
+
 	Random random = new Random();
 	
 	private Image img;
@@ -32,52 +31,61 @@ public class FeedProcessorImp  implements FeedProcessor{
 	 * @return
 	 */
 	private boolean checkCellForDead(Cell cell){
-		if(cell.getBorder().hasBottom()  && 
-				cell.getBorder().hasLeft()  &&
-				cell.getBorder().hasRight()  &&
-				cell.getBorder().hasTop()) {
-			return true;
-			
-		}
-		else {
-			return false;
-		}
+		int borderCount = 0;
+		
+		if(cell.getBorder().hasBottom())borderCount++;
+		if(cell.getBorder().hasLeft())borderCount++;
+		if(cell.getBorder().hasRight()) borderCount++ ;
+		if(cell.getBorder().hasTop()) borderCount++ ;
+		
+		if(borderCount<=2) return true;
+		else return false;
 	}
 	
-	private List<Feed> feed = new ArrayList<Feed>();
+	public ArrayList<Feed> feedList = new ArrayList<Feed>();
 	
+	public ArrayList<Feed> feedListCopy = new ArrayList<Feed>();
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean initialize(List<Cell> mazeDescription) {
-		img = ImageIO.read("");  
+		feedList.clear();
+		feedListCopy.clear();
+		try {
+			img = ImageIO.read(new File("feed1.jpg"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
 		//initialize feed in every
 		for(Cell cell : mazeDescription) {
 			if(random.nextInt(FEED_GENERATION_RATE)== 0 &&
-					!checkCellForDead(cell)) {
-				
+					checkCellForDead(cell)) {
 				FeedImp feed = new FeedImp();
-				
-				IconImp icon =  new IconImp();
-				feed.setIcon();
-				feed.add(e);
-				
+				IconImp icon =  new IconImp(img);
+				feed.setIcon(icon);
+				feed.setPosition(cell.getPosition());
+				feedList.add(feed);
 			}
 		}
 		
+		feedListCopy = (ArrayList<Feed>) feedList.clone();
 		
 		
 		
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void regenerateFeed() {
-		// TODO Auto-generated method stub
-		
+		feedList.clear();
+		feedList.addAll((ArrayList<Feed>) feedListCopy.clone()); 
 	}
 
 	@Override
 	public List<Feed> getFeed() {
-		return feed;
+		return feedList;
 	}
 
 }

@@ -13,6 +13,9 @@ public class IconImp implements Icon {
 	
 	
 	IconImp(Image img) {
+		//reccomended icon size
+		this.width = 32;
+		this.heigth = 32;
 		this.img = img;
 	}
 	public void setWidth(int width) {

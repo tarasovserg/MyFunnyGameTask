@@ -1,5 +1,6 @@
 package com.creamtec.techtalk.game.app;
 
+import java.awt.Point;
 import java.util.List;
 
 import javax.swing.SwingUtilities;
@@ -7,14 +8,27 @@ import javax.swing.SwingUtilities;
 import org.apache.log4j.Logger;
 
 import com.creamtec.techtalk.game.api.Cell;
+import com.creamtec.techtalk.game.api.Feed;
 import com.creamtec.techtalk.game.api.MazeGenerator;
+import com.creamtec.techtalk.game.api.Monster;
 import com.creamtec.techtalk.game.conf.ImplementationConfig;
+
+
 
 /**
  * The game entry point.
  */
 public class Main {
 
+	public static boolean isCell(List<Feed> feeds, Point pos) {
+		for(Feed feed: feeds) {
+			if(feed.getPosition().x == pos.x && feed.getPosition().y == pos.y){
+				return true;
+			}
+			
+		}
+		return false;
+	}
     /**
      * Class logger.
      */
@@ -23,6 +37,26 @@ public class Main {
     public static void main(String[] args) {
     	MazeGenerator maze = new MazeGeneratorImp();
     	List<Cell> list = maze.generateMaze(10, 10);
+    	FeedProcessorImp feed = new FeedProcessorImp();
+    	feed.initialize(list);
+    	List<Feed> feeds = feed.getFeed();
+    	MonsterProcessorImp mp = new MonsterProcessorImp();
+    	mp.initialize(list);
+    	List<Monster> monster = mp.getMonsters();
+    	System.out.println("MONSTER: "+monster.size());
+    	monster.remove(1);
+    	System.out.println("MONSTER: "+monster.size());
+    	mp.recreateMonsters();
+    	System.out.println("MONSTER: "+monster.size());
+    	for(Monster mst : monster) {
+    		System.out.println("X: "+mst.getPosition().x + "   Y: "+mst.getPosition().y);
+    	}
+    	
+    	System.out.println("REFRESH:");
+    	mp.refreshMonstersCycle();
+    	for(Monster mst : monster) {
+    		System.out.println("X: "+mst.getPosition().x + "   Y: "+mst.getPosition().y);
+    	}
     	for(int i=0; i<list.size(); i++) {
     		Cell cell = list.get(i);
     		if(cell.getPosition().y == 0) {
@@ -34,7 +68,10 @@ public class Main {
     				cell.getBorder().hasLeft() == false &&
     				cell.getBorder().hasRight() == false &&
     				cell.getBorder().hasTop() == false) {
-    			System.out.print("*");
+    			if(isCell(feeds, cell.getPosition())){
+    				System.out.print("8");
+    			}
+    			else System.out.print("*");
     			continue;
     		}
     		if(cell.getBorder().hasBottom()) {
@@ -55,6 +92,8 @@ public class Main {
     		}
     		
     	}
+    	
+    	
         /*SwingUtilities.invokeLater(new Runnable() {
 
             @Override

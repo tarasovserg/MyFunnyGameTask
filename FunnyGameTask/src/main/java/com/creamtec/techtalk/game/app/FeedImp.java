@@ -14,6 +14,10 @@ public class FeedImp implements Feed {
 	
 	private Icon icon;
 
+	public FeedImp() {
+		type = 1;
+	}
+	
 	public void setPosition(Point position) {
 		this.position = position;
 	}
