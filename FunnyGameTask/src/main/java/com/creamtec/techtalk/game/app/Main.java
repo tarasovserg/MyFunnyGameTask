@@ -7,11 +7,7 @@ import javax.swing.SwingUtilities;
 
 import org.apache.log4j.Logger;
 
-import com.creamtec.techtalk.game.api.Cell;
-import com.creamtec.techtalk.game.api.Feed;
 import com.creamtec.techtalk.game.api.MazeGenerator;
-import com.creamtec.techtalk.game.api.Monster;
-import com.creamtec.techtalk.game.api.MoveAction;
 import com.creamtec.techtalk.game.conf.ImplementationConfig;
 
 
@@ -21,96 +17,17 @@ import com.creamtec.techtalk.game.conf.ImplementationConfig;
  */
 public class Main {
 
-	public static boolean isCell(List<Feed> feeds, Point pos) {
-		for(Feed feed: feeds) {
-			if(feed.getPosition().x == pos.x && feed.getPosition().y == pos.y){
-				return true;
-			}
-			
-		}
-		return false;
-	}
     /**
      * Class logger.
      */
     private static final Logger LOGGER = Logger.getLogger(Main.class);
 
     public static void main(String[] args) {
-    	MazeGenerator maze = new MazeGeneratorImp();
-    	List<Cell> list = maze.generateMaze(10, 10);
-    	FeedProcessorImp feed = new FeedProcessorImp();
-    	feed.initialize(list);
-    	List<Feed> feeds = feed.getFeed();
-    	MonsterProcessorImp mp = new MonsterProcessorImp();
-    	mp.initialize(list);
-    	List<Monster> monster = mp.getMonsters();
-    	
-    	GameProcessorImp game = new GameProcessorImp();
-    	game.initialize(list, mp, feed);
-
-    	System.out.println(game.getPlayer().getPosition().x + "  "+game.getPlayer().getPosition().y);
-    	game.movePlayer(MoveAction.DOWN);
-    	game.movePlayer(MoveAction.DOWN);
-    	game.movePlayer(MoveAction.DOWN);
-    	game.movePlayer(MoveAction.DOWN);
-    	game.movePlayer(MoveAction.DOWN);
-    	game.movePlayer(MoveAction.DOWN);
-    	game.movePlayer(MoveAction.DOWN);
-    	game.movePlayer(MoveAction.DOWN);
-    	game.movePlayer(MoveAction.DOWN);
-    	game.movePlayer(MoveAction.DOWN);
-    	game.movePlayer(MoveAction.RIGHT);
-    	game.movePlayer(MoveAction.RIGHT);
-    	game.movePlayer(MoveAction.RIGHT);
-    	game.movePlayer(MoveAction.RIGHT);
-    	game.movePlayer(MoveAction.RIGHT);
-    	game.movePlayer(MoveAction.RIGHT);
-    	game.movePlayer(MoveAction.RIGHT);
-    	game.movePlayer(MoveAction.RIGHT);
-    	game.movePlayer(MoveAction.RIGHT);
-    	game.movePlayer(MoveAction.RIGHT);
-    	
-    	System.out.println(game.getPlayer().getScore());
-    	System.out.println(game.getPlayer().getPosition().x + "  "+game.getPlayer().getPosition().y);
-    	
-    	for(int i=0; i<list.size(); i++) {
-    		Cell cell = list.get(i);
-    		if(cell.getPosition().x == 0) {
-    			System.out.println();
-    		}
-    		/*System.out.println(cell.getPosition().x + "" + cell.getPosition().y);
-    		if(true) continue;*/
-    		if(cell.getBorder().hasBottom() == false && 
-    				cell.getBorder().hasLeft() == false &&
-    				cell.getBorder().hasRight() == false &&
-    				cell.getBorder().hasTop() == false) {
-    			if(isCell(feeds, cell.getPosition())){
-    				System.out.print("8");
-    			}
-    			else System.out.print("*");
-    			continue;
-    		}
-    		if(cell.getBorder().hasBottom()) {
-    			System.out.print("B");
-    			continue;
-    		}
-    		if(cell.getBorder().hasTop()) {
-    			System.out.print("T");
-    			continue;
-    		}
-    		if(cell.getBorder().hasLeft()) {
-    			System.out.print("L");
-    			continue;
-    		}
-    		if(cell.getBorder().hasRight()) {
-    			System.out.print("R");
-    			continue;
-    		}
-    		
-    	}
     	
     	
-        /*SwingUtilities.invokeLater(new Runnable() {
+    	
+    	
+        SwingUtilities.invokeLater(new Runnable() {
 
             @Override
             public void run() {
@@ -126,7 +43,7 @@ public class Main {
 //                frame.setVisible(true);
             }
 
-        });*/
+        });
     }
 
 }

@@ -1,9 +1,7 @@
 package com.creamtec.techtalk.game.app;
 
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,6 @@ import javax.imageio.ImageIO;
 import com.creamtec.techtalk.game.api.Cell;
 import com.creamtec.techtalk.game.api.Feed;
 import com.creamtec.techtalk.game.api.FeedProcessor;
-import com.creamtec.techtalk.game.api.Icon;
 
 public class FeedProcessorImp  implements FeedProcessor{
 
