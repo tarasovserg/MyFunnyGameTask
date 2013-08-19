@@ -59,6 +59,8 @@ public class FeedProcessorImp  implements FeedProcessor{
 		}  
 		//initialize feed in every
 		for(Cell cell : mazeDescription) {
+			if(cell.getPosition().x == 0 && cell.getPosition().y == 0) continue;
+			
 			if(random.nextInt(FEED_GENERATION_RATE)== 0 &&
 					checkCellForDead(cell)) {
 				FeedImp feed = new FeedImp();

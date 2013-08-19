@@ -67,6 +67,7 @@ public class MonsterProcessorImp implements MonsterProcessor {
 		}  
 		//initialize monster
 		for(Cell cell : mazeDescription) {
+			if(cell.getPosition().x == 0 && cell.getPosition().y == 0) continue;
 			if(random.nextInt(MONSTER_GENERATION_RATE)== 0 &&
 					checkCellForDead(cell)) {
 				MonsterImp monster = new MonsterImp();

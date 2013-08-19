@@ -13,17 +13,28 @@ public class PlayerImp implements Player {
 	
 	private long score;
 	
+	public void setPosition(Point position) {
+		this.position = position;
+	}
 	
 	@Override
 	public Point getPosition() {
 		return position;
 	}
 
+	public void setIcon(Icon icon) {
+		this.icon = icon;
+	}
+	
 	@Override
 	public Icon getIcon() {
 		return icon;
 	}
 
+	public void setScore(long score) {
+		this.score = score;
+	}
+	
 	@Override
 	public long getScore() {
 		return score;

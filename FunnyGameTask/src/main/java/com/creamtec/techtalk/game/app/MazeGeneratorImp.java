@@ -33,7 +33,7 @@ public class MazeGeneratorImp implements MazeGenerator{
 					cellBorder.setRigth(true);
 				}
 				cell.setBorder(cellBorder);
-				Point position = new Point(i, j);
+				Point position = new Point(j, i);
 				cell.setPosition(position);
 				generateMazeResult.add(cell);
 			}

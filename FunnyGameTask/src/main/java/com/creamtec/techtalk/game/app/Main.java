@@ -11,6 +11,7 @@ import com.creamtec.techtalk.game.api.Cell;
 import com.creamtec.techtalk.game.api.Feed;
 import com.creamtec.techtalk.game.api.MazeGenerator;
 import com.creamtec.techtalk.game.api.Monster;
+import com.creamtec.techtalk.game.api.MoveAction;
 import com.creamtec.techtalk.game.conf.ImplementationConfig;
 
 
@@ -43,23 +44,38 @@ public class Main {
     	MonsterProcessorImp mp = new MonsterProcessorImp();
     	mp.initialize(list);
     	List<Monster> monster = mp.getMonsters();
-    	System.out.println("MONSTER: "+monster.size());
-    	monster.remove(1);
-    	System.out.println("MONSTER: "+monster.size());
-    	mp.recreateMonsters();
-    	System.out.println("MONSTER: "+monster.size());
-    	for(Monster mst : monster) {
-    		System.out.println("X: "+mst.getPosition().x + "   Y: "+mst.getPosition().y);
-    	}
     	
-    	System.out.println("REFRESH:");
-    	mp.refreshMonstersCycle();
-    	for(Monster mst : monster) {
-    		System.out.println("X: "+mst.getPosition().x + "   Y: "+mst.getPosition().y);
-    	}
+    	GameProcessorImp game = new GameProcessorImp();
+    	game.initialize(list, mp, feed);
+
+    	System.out.println(game.getPlayer().getPosition().x + "  "+game.getPlayer().getPosition().y);
+    	game.movePlayer(MoveAction.DOWN);
+    	game.movePlayer(MoveAction.DOWN);
+    	game.movePlayer(MoveAction.DOWN);
+    	game.movePlayer(MoveAction.DOWN);
+    	game.movePlayer(MoveAction.DOWN);
+    	game.movePlayer(MoveAction.DOWN);
+    	game.movePlayer(MoveAction.DOWN);
+    	game.movePlayer(MoveAction.DOWN);
+    	game.movePlayer(MoveAction.DOWN);
+    	game.movePlayer(MoveAction.DOWN);
+    	game.movePlayer(MoveAction.RIGHT);
+    	game.movePlayer(MoveAction.RIGHT);
+    	game.movePlayer(MoveAction.RIGHT);
+    	game.movePlayer(MoveAction.RIGHT);
+    	game.movePlayer(MoveAction.RIGHT);
+    	game.movePlayer(MoveAction.RIGHT);
+    	game.movePlayer(MoveAction.RIGHT);
+    	game.movePlayer(MoveAction.RIGHT);
+    	game.movePlayer(MoveAction.RIGHT);
+    	game.movePlayer(MoveAction.RIGHT);
+    	
+    	System.out.println(game.getPlayer().getScore());
+    	System.out.println(game.getPlayer().getPosition().x + "  "+game.getPlayer().getPosition().y);
+    	
     	for(int i=0; i<list.size(); i++) {
     		Cell cell = list.get(i);
-    		if(cell.getPosition().y == 0) {
+    		if(cell.getPosition().x == 0) {
     			System.out.println();
     		}
     		/*System.out.println(cell.getPosition().x + "" + cell.getPosition().y);
