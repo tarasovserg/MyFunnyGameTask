@@ -26,11 +26,13 @@ public class Main {
     	
     }
     
+    public void helloWorld() {
+		
+	}
     public static void main(String[] args) {
     	
     	
-    	
-    	
+    	String s = "";    	
         SwingUtilities.invokeLater(new Runnable() {
 
             @Override
