@@ -22,11 +22,13 @@ public class Main {
      */
     private static final Logger LOGGER = Logger.getLogger(Main.class);
 
+    public void helloWorld() {
+		
+	}
     public static void main(String[] args) {
     	
     	
-    	
-    	
+    	String s = "";    	
         SwingUtilities.invokeLater(new Runnable() {
 
             @Override
