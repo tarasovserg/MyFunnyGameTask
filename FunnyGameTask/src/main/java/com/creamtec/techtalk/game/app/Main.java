@@ -27,7 +27,7 @@ public class Main {
     }
     
     public void helloWorld() {
-		
+		System.out.println("123");
 	}
     public static void main(String[] args) {
     	
