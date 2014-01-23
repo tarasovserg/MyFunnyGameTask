@@ -23,7 +23,7 @@ public class Main {
     private static final Logger LOGGER = Logger.getLogger(Main.class);
 
     public void helloWorld() {
-		
+		System.out.println("123");
 	}
     public static void main(String[] args) {
     	
