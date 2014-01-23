@@ -22,6 +22,10 @@ public class Main {
      */
     private static final Logger LOGGER = Logger.getLogger(Main.class);
 
+    public static void helloMan() {
+    	
+    }
+    
     public static void main(String[] args) {
     	
     	
